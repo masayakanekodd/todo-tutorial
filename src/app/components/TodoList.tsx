@@ -4,9 +4,27 @@ import { useState } from 'react';
 import { Todo } from '../types/todo';
 import TodoItem from './TodoItem';
 
+const kawaiiFaces = [
+  '(｡･ω･｡)',
+  '(◕‿◕✿)',
+  '(●´ω｀●)',
+  '(◍•ᴗ•◍)',
+  '(♡˙︶˙♡)',
+  '(◠‿◠)',
+  '(＾▽＾)',
+  '(◕ᴗ◕✿)',
+  '(｡♥‿♥｡)',
+  '(◕‿◕)',
+];
+
 export default function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodo, setNewTodo] = useState('');
+
+  const getRandomKawaiiEmoticon = () => {
+    const randomIndex = Math.floor(Math.random() * kawaiiFaces.length);
+    return kawaiiFaces[randomIndex];
+  };
 
   const addTodo = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,7 +33,7 @@ export default function TodoList() {
         ...todos,
         {
           id: Date.now(),
-          text: newTodo.trim(),
+          text: `${newTodo.trim()} ${getRandomKawaiiEmoticon()}`,
           completed: false,
           createdAt: new Date(),
         },
